@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+
+<body>
+    <form>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" />
+        <br> <br />
+
+        <label for="cnic">CNIC:</label>
+        <input type="text" id="cnic" placeholder="Enter your cnic" maxlength="11" />
+        <br> <br />
+
+        Select Gender :
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label>
+
+        <br> <br />
+
+        Select Class Timings :
+        <input type="radio" id="9_11" name="timing" value="9_11" />
+        <label for="9_11">9 to 11</label>
+
+        <input type="radio" id="11_1" name="timing" value="11_1" />
+        <label for="11_1">11 to 1</label>
+
+        <input type="radio" id="2_4" name="timing" value="2_4" />
+        <label for="2_4">2 se 4</label>
+
+
+        <br> <br />
+
+
+        Class Timings (Can Select Multiple) :
+        <input type="checkbox" id="9_11" name="timing" value="9_11" />
+        <label for="9_11">9 to 11</label>
+
+        <input type="checkbox" id="11_1" name="timing" value="11_1" />
+        <label for="11_1">11 to 1</label>
+
+        <input type="checkbox" id="2_4" name="timing" value="2_4" />
+        <label for="2_4">2 se 4</label>
+
+
+        <br> <br />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter your age" />
+        <br> <br />
+
+        <label for="search">Search:</label>
+        <input type="search" id="search" placeholder="Find your info" />
+        <br> <br />
+        <label for="dob">Birth Date:</label>
+        <input type="date" id="dob" placeholder="Enter your birth date" />
+        <br> <br />
+
+        <label for="time">Birth Time:</label>
+        <input type="time" id="time" placeholder="Enter your birth time" />
+        <br> <br />
+
+        <label for="file">Upload Document:</label>
+        <input type="file" id="file" placeholder="Upload your document" />
+        <br> <br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <br> <br />
+
+        <label for="about_you">About:</label>
+        <textarea id="about_you" rows="4" cols="50" placeholder="Write about yourself">
+       </textarea>
+        <br> <br />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password" />
+
+
+        <input  type="button" value="Enroll"/>
+    </form>
+</body>
+
+</html>
