@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>Team A</h1>
+        <h1 id="teamAScore">0</h1>
+        <p>Last Number <span id="currentNumberA">0</span></p>
+        <button id="teamABtn">Roll Dice</button>
+      </div>
+      <div>
+        <h4>Turns</h4>
+        <h4><span id="teamATurns">0</span>:<span id="teamBTurns">0</span></h4>
+      </div>
+      <div>
+        <h1>Team B</h1>
+        <h1 id="teamBScore">0</h1>
+        <p>Last Number <span id="currentNumberB">0</span></p>
+        <button id="teamBBtn">Roll Dice</button>
+      </div>
+    </div>
+
+    <div> <h1 id="resultAnnouncement"></h1></div>
+    <script src="script.js"></script>
+  </body>
+</html>
