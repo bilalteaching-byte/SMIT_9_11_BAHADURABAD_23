@@ -1,0 +1,15 @@
+#products_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.product_card{
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.product_img{
+    height: 300px;
+    width: 100%;
+}
