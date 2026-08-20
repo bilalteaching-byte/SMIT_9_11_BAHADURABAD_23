@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destructuring</title>
+  </head>
+  <body>
+    <h1>Destructuring</h1>
+
+    <script>
+      let obj = {
+        id: 1,
+        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        price: 109.95,
+        description:
+          "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        category: "men's clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+        rating: {
+          rate: 3.9,
+          count: 120,
+        },
+      };
+
+      const { price: productPrice, title } = obj;
+
+      //   console.log(price)
+
+      //   let [val, setVal] = [
+      //     10,
+      //     function () {
+      //       console.log("Array mein function");
+      //     },
+      //   ];
+
+      //   let firstName = "Bilal Raza";
+
+      //   let greeting = () => {
+      //     let firstName = "Bilal";
+      //     let y;
+      //     if (true) {
+      //       var x = 10;
+      //       y = 10;
+      //     }
+      //     console.log("x=>", x);
+      //     console.log("y=>", y);
+      //   };
+
+      //   greeting();
+
+      // rest paramters & spread operator
+
+      //   let a = {
+      //     name: "Bilal",
+      //   };
+
+      //   let b = { abuName: "Test", ...a };
+
+      //   b.name = "Bilal Test";
+
+      //   console.log("a=>", a.name);
+      //   console.log("a=>", a.name);
+      //   console.log("b=>", b);
+
+      //   let arr = ["aam", "kela", "angoor"];
+      //   let newArr = [...arr, "seb", "amrood", "chilli"];
+
+      //   console.log(arr);
+      //   console.log(newArr);
+
+      //   let sabzi = ["aaloo", "piyaz", "tamatar"];
+      //   let phal = ["kela", "aam", "angoor"];
+
+      //   let donuChahye = [...sabzi, ...phal];
+      //   console.log(donuChahye)
+
+      // conditional (ternary) operator
+
+      let abuBangae = true;
+
+      alert(
+        abuBangae
+          ? "Mubarak ho , Mithai khilado"
+          : "Biryani khilado, Dua karenge",
+      );
+    </script>
+  </body>
+</html>
