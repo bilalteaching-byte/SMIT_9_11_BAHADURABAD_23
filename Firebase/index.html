@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
+
 <body>
 
-    <h1>Welcome to Firebase</h1>
+  <div id="auth_container">
+    <div>
+      <h1>Register User</h1>
+      <input type="text" id="name" placeholder="Full Name">
+      <input type="email" id="register_email" placeholder="Email">
+      <input type="password" id="register_password" placeholder="Password">
+      <button id="registerBtn">Register</button>
+    </div>
+
+    <div>
+      <h1>Login</h1>
+      <input type="email" id="login_email" placeholder="Email">
+      <input type="password" id="login_password" placeholder="Password">
+      <button id="loginBtn">Login</button>
+    </div>
+  </div>
+
+  <div id="dashboard_container">
+    <h1 id="welcomeMsg">Welcome to Firebase</h1>
+
     <input type="text" placeholder="Title" id="title">
     <input type="text" placeholder="Description" id="description">
     <button id="addPost">Add Doc</button>
+    <button id="signoutBtn">Signout</button>
 
 
     <div id="allPosts">
 
     </div>
-  <script type="module" src="script.js"></script>  
+  </div>
+
+  <script type="module" src="script.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
+
 </html>
