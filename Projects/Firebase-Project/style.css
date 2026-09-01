@@ -1,0 +1,137 @@
+/* ===== Basic Reset ===== */
+
+ @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ===== Auth Section (Register OR Login, one at a time) ===== */
+#auth_container {
+  display: flex;
+  justify-content: center;
+}
+
+#register_box,
+#login_box {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+#auth_container h1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* ===== Toggle Link (switch between Register and Login) ===== */
+.toggle_text {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+}
+
+.toggle_text span {
+  color: #4a90e2;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.toggle_text span:hover {
+  text-decoration: underline;
+}
+
+/* ===== Dashboard Section ===== */
+#dashboard_container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+#dashboard_container h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ===== Shared Input & Button Styles ===== */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+button:disabled {
+  background-color: #a9c6e8;
+  cursor: not-allowed;
+}
+
+/* ===== Posts List ===== */
+#allPosts {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#allPosts > div {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+#allPosts h2 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+#allPosts p {
+  font-size: 14px;
+  color: #555;
+}
