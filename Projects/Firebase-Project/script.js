@@ -10,6 +10,7 @@ import {
   getDoc,
   doc,
   getDocs,
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 //auth
@@ -61,9 +62,7 @@ const auth = getAuth(app);
 const userColName = "users";
 const postColName = "posts";
 
-let userInfo = {
-  name:"huzaifa"
-}
+let userInfo
 console.log(userInfo);
 
 //collection , create ref for collection
@@ -71,8 +70,10 @@ console.log(userInfo);
 //setDoc , it takes two Params , one is reference to document , second is document to be added
 
 // show login box by default, hide register box
-register_box.style.display = "none";
 auth_container.style.display = "none";
+login_box.style.display = "none";
+register_box.style.display = "none";
+dashboard_container.style.display = "none";
 loading_container.style.display = "block";
 
 let toggleToLogin = () => {
@@ -91,7 +92,7 @@ showRegister.addEventListener("click", toggleToRegister);
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const uid = user.uid;
-    let userDetail = await getUserFromDB();
+    let userDetail = await getUserFromDB(uid);
     userInfo = userDetail;
     auth_container.style.display = "none";
     dashboard_container.style.display = "block";
@@ -102,7 +103,7 @@ onAuthStateChanged(auth, async (user) => {
     dashboard_container.style.display = "none";
     loading_container.style.display = "none";
     auth_container.style.display = "block";
-
+    login_box.style.display = "block";
   }
 });
 
@@ -199,10 +200,15 @@ let logoutUser = () => {
 
 let addPostToDb = () => {
   addBtn.disabled = true;
-  addDoc(collection(db, "posts"), {
+  addDoc(collection(db, postColName), {
     title: title.value,
     description: description.value,
-    userId:userInfo.uid
+    userId: userInfo.uid,
+    userName: userInfo.name,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    likes: [],
+    dislikes: []
   })
     .then((doc) => {
       console.log("Document Add hogya he", doc);
@@ -221,11 +227,13 @@ let getPostsFromDB = () => {
     querySnapshot.forEach((doc) => {
       let id = doc.id;
       let info = doc.data();
+      let postTime = info.createdAt.toDate().toLocaleString();
 
-      let card = `<div id = "${id}">
+      let card = `<div class = "post_card" id = "${id}">
       <h2>${info.title}</h2>
       <p> ${info.description} </p>
-      <p>${info.userId ? info.userId : "No User ID"}</p>
+      <p>By: <b> ${info.userName}</b></p>
+      <p>At: <b> ${postTime}</b></p>
       </div>`;
 
       allPosts.innerHTML += card;

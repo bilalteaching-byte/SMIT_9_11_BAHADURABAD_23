@@ -135,3 +135,9 @@ button:disabled {
   font-size: 14px;
   color: #555;
 }
+
+.post_card{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
