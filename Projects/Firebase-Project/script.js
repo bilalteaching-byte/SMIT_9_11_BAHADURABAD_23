@@ -11,6 +11,8 @@ import {
   doc,
   getDocs,
   serverTimestamp,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 //auth
@@ -42,6 +44,7 @@ let register_box = document.getElementById("register_box");
 let login_box = document.getElementById("login_box");
 let showLogin = document.getElementById("showLogin");
 let showRegister = document.getElementById("showRegister");
+let users_chips = document.getElementById("users_chips");
 
 const firebaseConfig = {
   apiKey: "AIzaSyCo96ak3VFU5_jZPA6qon_VGdK2W9kwqd0",
@@ -62,7 +65,7 @@ const auth = getAuth(app);
 const userColName = "users";
 const postColName = "posts";
 
-let userInfo
+let userInfo;
 console.log(userInfo);
 
 //collection , create ref for collection
@@ -199,7 +202,10 @@ let logoutUser = () => {
 };
 
 let addPostToDb = () => {
+  if (title.value == "" || description.value == "")
+    return alert("Add Proper info");
   addBtn.disabled = true;
+
   addDoc(collection(db, postColName), {
     title: title.value,
     description: description.value,
@@ -208,7 +214,7 @@ let addPostToDb = () => {
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
     likes: [],
-    dislikes: []
+    dislikes: [],
   })
     .then((doc) => {
       console.log("Document Add hogya he", doc);
@@ -221,9 +227,15 @@ let addPostToDb = () => {
     });
 };
 
-let getPostsFromDB = () => {
+let getPostsFromDB = (userId) => {
+  let q;
+  if (userId) {
+    q = query(collection(db, postColName), where("userId", "==", userId));
+  } else {
+    q = query(collection(db, postColName));
+  }
   allPosts.innerHTML = "";
-  getDocs(collection(db, "posts")).then((querySnapshot) => {
+  getDocs(q).then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       let id = doc.id;
       let info = doc.data();
@@ -241,6 +253,27 @@ let getPostsFromDB = () => {
   });
 };
 
+let getUsersFromDB = () => {
+  users_chips.innerHTML = "";
+  getDocs(collection(db, userColName)).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      let id = doc.id;
+      let info = doc.data();
+      console.log("info of users=>", info);
+
+      let chip = `<div class='user_chips' id=${id}>${info.name}</div>`;
+      users_chips.innerHTML += chip;
+    });
+  });
+};
+
+users_chips.addEventListener("click", (e) => {
+  if (e.target.classList.contains("user_chips")) {
+    let userId = e.target.id;
+    getPostsFromDB(userId)
+  }
+});
+
 let getUserFromDB = (uid) => {
   let userRef = doc(db, userColName, uid || auth.currentUser?.uid);
   return getDoc(userRef).then((snapshot) => {
@@ -250,6 +283,7 @@ let getUserFromDB = (uid) => {
 };
 
 getPostsFromDB();
+getUsersFromDB();
 
 addBtn.addEventListener("click", addPostToDb);
 registerBtn.addEventListener("click", registerUser);
