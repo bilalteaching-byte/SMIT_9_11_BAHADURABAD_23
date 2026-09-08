@@ -13,6 +13,8 @@ import {
   serverTimestamp,
   query,
   where,
+  updateDoc,
+  arrayUnion, arrayRemove
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 //auth
@@ -246,6 +248,8 @@ let getPostsFromDB = (userId) => {
       <p> ${info.description} </p>
       <p>By: <b> ${info.userName}</b></p>
       <p>At: <b> ${postTime}</b></p>
+      <p>  <span  id = "${id + "_like"}" class = "like_btn">Like</span> : ${info?.likes?.length}  </p>
+      <p>  <span  id = "${id + "_dislike"}" class = "dislike_btn">Dislike</span> : ${info?.dislikes?.length} </p>
       </div>`;
 
       allPosts.innerHTML += card;
@@ -253,14 +257,13 @@ let getPostsFromDB = (userId) => {
   });
 };
 
+
 let getUsersFromDB = () => {
   users_chips.innerHTML = "";
   getDocs(collection(db, userColName)).then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       let id = doc.id;
       let info = doc.data();
-      console.log("info of users=>", info);
-
       let chip = `<div class='user_chips' id=${id}>${info.name}</div>`;
       users_chips.innerHTML += chip;
     });
@@ -273,6 +276,27 @@ users_chips.addEventListener("click", (e) => {
     getPostsFromDB(userId)
   }
 });
+
+allPosts.addEventListener("click", (e) => {
+  console.log(e)
+  let docId = e.target.id.split("_")[0]
+  let isLike = e.target.innerText == "Like"
+  console.log(docId, isLike)
+
+  let postRef = doc(db, postColName, docId)
+  if (isLike) {
+    updateDoc(postRef, {
+      likes: arrayUnion(userInfo.uid)
+    }).then(() => getPostsFromDB())
+  } else {
+    updateDoc(postRef, {
+      dislikes: arrayUnion(userInfo.uid)
+    }).then(() => getPostsFromDB())
+  }
+});
+
+
+
 
 let getUserFromDB = (uid) => {
   let userRef = doc(db, userColName, uid || auth.currentUser?.uid);

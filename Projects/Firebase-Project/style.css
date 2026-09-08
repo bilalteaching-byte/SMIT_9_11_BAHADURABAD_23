@@ -1,9 +1,13 @@
 /* ===== Basic Reset ===== */
 
- @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 * {
   margin: 0;
@@ -136,15 +140,27 @@ button:disabled {
   color: #555;
 }
 
-.post_card{
+.post_card {
   display: flex;
   gap: 5px;
   flex-direction: column;
 }
 
-.user_chips{
+.user_chips {
   border: 1px solid gray;
   padding: 6px 2px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.like_btn {
+  border: 1px solid grey;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.dislike_btn {
+  border: 1px solid grey;
+  padding: 2px 4px;
+  cursor: pointer;
 }
