@@ -1,4 +1,20 @@
-/* ===== Basic Reset ===== */
+/* ===== Tokens ===== */
+:root {
+  --paper: #f6f7f3;
+  --surface: #ffffff;
+  --ink: #1c201d;
+  --ink-soft: #5b6058;
+  --ink-faint: #8b9086;
+  --line: #dce1d9;
+  --pine: #2f6b4f;
+  --pine-dark: #234f3a;
+  --pine-tint: #e7f0ea;
+  --clay: #8a6a4c;
+  --clay-tint: #f1e9e1;
+  --warn: #a8402b;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
 
 @keyframes spin {
   from {
@@ -9,6 +25,15 @@
   }
 }
 
+@keyframes draw_underline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,151 +41,430 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 48px 20px;
+  line-height: 1.5;
 }
 
-/* ===== Auth Section (Register OR Login, one at a time) ===== */
-#auth_container {
+h1,
+h2 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Loading ===== */
+.loading_container {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--paper);
+}
+
+.loading_inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-#register_box,
-#login_box {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--line);
+  border-top: 3px solid var(--pine);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-#auth_container h1 {
-  font-size: 20px;
-  margin-bottom: 15px;
+.loading_container h4 {
+  color: var(--ink-soft);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* ===== Auth ===== */
+/* Note: script.js sets this container's display to block/none inline,
+   which overrides any display value set here — layout below relies on
+   normal block flow, not flex, so it holds up either way. */
+.auth_container {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 40px;
+}
+
+.wordmark {
   text-align: center;
+  margin-bottom: 28px;
 }
 
-/* ===== Toggle Link (switch between Register and Login) ===== */
+.wordmark h1 {
+  font-size: 30px;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.wordmark h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--pine);
+  transform-origin: left;
+  animation: draw_underline 0.6s ease-out 0.1s both;
+}
+
+.wordmark p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.auth_box {
+  background: var(--surface);
+  padding: 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  width: 100%;
+}
+
+.auth_box h2 {
+  font-size: 19px;
+  margin-bottom: 18px;
+}
+
+/* ===== Toggle Link ===== */
 .toggle_text {
   text-align: center;
   font-size: 13px;
-  color: #555;
+  color: var(--ink-soft);
+  margin-top: 4px;
 }
 
 .toggle_text span {
-  color: #4a90e2;
+  color: var(--pine);
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .toggle_text span:hover {
   text-decoration: underline;
 }
 
-/* ===== Dashboard Section ===== */
-#dashboard_container {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+/* ===== Dashboard ===== */
+.dashboard_container {
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
 }
 
-#dashboard_container h1 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  text-align: center;
+.dashboard_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
 }
 
-/* ===== Shared Input & Button Styles ===== */
+.eyebrow-free-wordmark {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--pine);
+  margin-bottom: 2px;
+}
+
+.dashboard_header h1 {
+  font-size: 24px;
+}
+
+/* ===== Shared Inputs & Buttons ===== */
 input {
   width: 100%;
-  padding: 10px;
+  padding: 11px 12px;
   margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   font-size: 14px;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+input::placeholder {
+  color: var(--ink-faint);
 }
 
 input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px var(--pine-tint);
 }
 
 button {
-  width: 100%;
-  padding: 10px;
+  padding: 11px 16px;
   border: none;
-  border-radius: 4px;
-  background-color: #4a90e2;
+  border-radius: var(--radius-sm);
+  background-color: var(--pine);
   color: #ffffff;
   font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  margin-bottom: 10px;
+  transition: background-color 0.15s ease;
 }
 
 button:hover {
-  background-color: #357abd;
+  background-color: var(--pine-dark);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--pine-dark);
+  outline-offset: 2px;
 }
 
 button:disabled {
-  background-color: #a9c6e8;
+  background-color: var(--line);
+  color: var(--ink-faint);
   cursor: not-allowed;
 }
 
-/* ===== Posts List ===== */
-#allPosts {
-  margin-top: 20px;
+.auth_box button,
+.compose_card button {
+  width: 100%;
+}
+
+.ghost_btn {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  width: auto;
+  padding: 8px 14px;
+  font-weight: 500;
+}
+
+.ghost_btn:hover {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
+
+/* ===== Compose card ===== */
+.compose_card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--pine);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.compose_card input {
+  margin-bottom: 10px;
+}
+
+.compose_card input:last-of-type {
+  margin-bottom: 16px;
+}
+
+/* ===== Filters ===== */
+.filter_section {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.section_label {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.chips_row {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 
-#allPosts > div {
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 12px;
+.chips_row::-webkit-scrollbar {
+  height: 5px;
 }
 
-#allPosts h2 {
-  font-size: 16px;
-  margin-bottom: 5px;
+.chips_row::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
 }
 
-#allPosts p {
-  font-size: 14px;
-  color: #555;
-}
-
-.post_card {
-  display: flex;
-  gap: 5px;
-  flex-direction: column;
+.chips_row::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .user_chips {
-  border: 1px solid gray;
-  padding: 6px 2px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 7px 14px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.like_btn {
-  border: 1px solid grey;
-  padding: 2px 4px;
-  cursor: pointer;
+.user_chips:hover {
+  border-color: var(--pine);
+  color: var(--pine-dark);
 }
 
+/* ===== Feed ===== */
+.feed_section {
+  padding-bottom: 20px;
+}
+
+#allPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#allPosts:empty::before {
+  content: "No notes yet. Be the first to write one.";
+  display: block;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+  padding: 32px 0;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+}
+
+.post_card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink-faint);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
+.post_card h2 {
+  font-size: 17px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+/* description */
+.post_card p:nth-of-type(1) {
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+/* byline */
+.post_card p:nth-of-type(2) {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* timestamp */
+.post_card p:nth-of-type(3) {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+
+.post_card p:nth-of-type(2) b,
+.post_card p:nth-of-type(3) b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* like / dislike row */
+.post_card p:nth-of-type(4),
+.post_card p:nth-of-type(5) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-right: 14px;
+  margin-bottom: 0;
+}
+
+.like_btn,
 .dislike_btn {
-  border: 1px solid grey;
-  padding: 2px 4px;
+  border: 1px solid var(--line);
+  padding: 4px 10px;
   cursor: pointer;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.like_btn:hover {
+  border-color: var(--pine);
+  color: var(--pine-dark);
+  background: var(--pine-tint);
+}
+
+.dislike_btn:hover {
+  border-color: var(--clay);
+  color: var(--clay);
+  background: var(--clay-tint);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 420px) {
+  body {
+    padding: 28px 14px;
+  }
+
+  .dashboard_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ghost_btn {
+    align-self: flex-end;
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .wordmark h1::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+
+  .spinner {
+    animation-duration: 1.4s;
+  }
+}
+
+/* ===== Toastify override ===== */
+.toastify {
+  border-radius: var(--radius-sm) !important;
+  font-family: "Inter", sans-serif !important;
+  box-shadow: none !important;
+  background: var(--pine) !important;
 }
