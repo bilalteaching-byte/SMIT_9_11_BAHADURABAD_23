@@ -1,0 +1,266 @@
+/* ========================================
+   COMMON BUTTON STYLES
+======================================== */
+
+button {
+  font-size: 16px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  margin: 10px;
+}
+/* ========================================
+   1. FILLED BUTTON
+======================================== */
+
+.btn-filled {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   2. OUTLINE BUTTON
+======================================== */
+
+.btn-outline {
+  background-color: transparent;
+  color: blue;
+  border: 2px solid blue;
+  padding: 10px 23px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   3. WHITE BUTTON
+======================================== */
+
+.btn-white {
+  background-color: white;
+  color: #222;
+  border: 1px solid #ddd;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   4. PILL BUTTON
+======================================== */
+
+.btn-pill {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+}
+
+/* ========================================
+   5. GHOST BUTTON
+======================================== */
+
+.btn-ghost {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 12px 25px;
+}
+
+/* ========================================
+   6. SHADOW BUTTON
+======================================== */
+
+.btn-shadow {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px gray;
+}
+
+/* ========================================
+   7. GRADIENT BUTTON
+======================================== */
+
+.btn-gradient {
+  background: linear-gradient(45deg, blue, purple);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+}
+
+/* ========================================
+   8. 3D BUTTON
+======================================== */
+
+.btn-3d {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  box-shadow: 0 5px 0 darkgreen;
+}
+
+/* ========================================
+   9. TEXT BUTTON
+======================================== */
+
+.btn-text {
+  background: none;
+  border: none;
+  color: blue;
+  padding: 10px;
+}
+
+/* ========================================
+   10. HOVER BUTTON
+======================================== */
+
+.btn-hover {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+.btn-hover:hover {
+  background-color: darkblue;
+}
+
+/* ========================================
+   11. DANGER BUTTON
+======================================== */
+
+.btn-danger {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   12. SUCCESS BUTTON
+======================================== */
+
+.btn-success {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   13. DISABLED BUTTON
+======================================== */
+
+.btn-disabled {
+  background-color: #ccc;
+  color: #777;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   14. ROUNDED BUTTON
+======================================== */
+
+.btn-rounded {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+}
+
+/* ========================================
+   15. BORDER BUTTON
+======================================== */
+
+.btn-border {
+  background-color: white;
+  color: purple;
+  border: 3px solid purple;
+  padding: 10px 23px;
+  border-radius: 8px;
+}
+
+/* ========================================
+   16. NEON / GLOW BUTTON
+======================================== */
+
+.btn-glow {
+  background-color: black;
+  color: white;
+  border: 2px solid cyan;
+  padding: 12px 25px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px cyan;
+}
+
+/* ========================================
+   17. TRANSPARENT BUTTON
+======================================== */
+
+.btn-transparent {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  padding: 12px 25px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   18. HOVER SCALE BUTTON
+======================================== */
+
+.btn-scale {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btn-scale:hover {
+  transform: scale(1.1);
+}
+
+/* ========================================
+   19. HOVER COLOR + SHADOW
+======================================== */
+
+.btn-effect {
+  background-color: #222;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btn-effect:hover {
+  background-color: blue;
+  box-shadow: 0 5px 15px gray;
+}
+
+/* ========================================
+   20. UNDERLINE / LINK STYLE
+======================================== */
+
+.btn-link {
+  background: none;
+  color: blue;
+  border: none;
+  padding: 10px;
+  text-decoration: underline;
+}
