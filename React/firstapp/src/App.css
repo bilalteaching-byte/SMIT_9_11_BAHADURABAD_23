@@ -264,3 +264,10 @@ button {
   padding: 10px;
   text-decoration: underline;
 }
+
+
+
+input {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
