@@ -1,4 +1,4 @@
-function Text({ title, align, size, weight, family, color, fontStyle }) {
+function Text({ title, align, size, weight, family, color, fontStyle, textDecorationLine }) {
   return (
     <p
       style={{
@@ -8,6 +8,7 @@ function Text({ title, align, size, weight, family, color, fontStyle }) {
         fontFamily: family ?? "monospace",
         color: color ?? "black",
         fontStyle: fontStyle ?? "normal",
+        textDecorationLine: textDecorationLine ?? "normal"
       }}
     >
       {title}

@@ -1,8 +1,9 @@
 import "../App.css"
 
-function Button({ title, onClick, className }) {
+function Button({ title, onClick, className, style }) {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick}
+      style={style}>
       {title}
     </button>
   );
