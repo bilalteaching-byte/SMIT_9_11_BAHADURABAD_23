@@ -23,7 +23,6 @@ function App() {
       <Button title={"Counter"} onClick={()=> setComp("counter")} />
       <Button title={"Watch"}  onClick={()=> setComp("stop")} />
 
-        style={{
       {comp === "counter" ? <LearninUseEffect /> : <Stopwatch />}
     </div>
   );
