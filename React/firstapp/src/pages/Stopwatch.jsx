@@ -12,6 +12,7 @@ import {
   textAlign,
 } from "../constant/theme";
 import Text from "../components/text";
+import Navbar from "../components/navbar";
 
 function Stopwatch() {
   const [ms, setMs] = useState(0);
@@ -34,6 +35,8 @@ function Stopwatch() {
 
   return (
     <div>
+      <Navbar />
+
       <Text title={"StopWatch"} size={fontSizes.huge} />
 
       <div

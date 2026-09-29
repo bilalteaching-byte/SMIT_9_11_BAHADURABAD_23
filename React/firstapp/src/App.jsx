@@ -14,16 +14,16 @@ import {
 import Text from "./components/text";
 import LearninUseEffect from "./pages/learningUseEffect";
 import Stopwatch from "./pages/Stopwatch";
+import { NavLink, Link } from "react-router";
+import Navbar from "./components/navbar";
 
 function App() {
   const [comp, setComp] = useState("counter");
 
   return (
     <div>
-      <Button title={"Counter"} onClick={()=> setComp("counter")} />
-      <Button title={"Watch"}  onClick={()=> setComp("stop")} />
-
-      {comp === "counter" ? <LearninUseEffect /> : <Stopwatch />}
+      <Navbar />
+      <LearninUseEffect />
     </div>
   );
 }
