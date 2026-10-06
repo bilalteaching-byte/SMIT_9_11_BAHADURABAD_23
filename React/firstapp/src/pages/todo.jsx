@@ -5,6 +5,7 @@ import Button from "../components/button";
 import { btnStyles, fontFamilies, fontSizes, fontWeights } from "../constant/theme";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegCheckCircle } from "react-icons/fa";
+import Navbar from "../components/navbar";
 
 function Todos() {
   const [todos, setTodos] = useState([
@@ -40,6 +41,8 @@ function Todos() {
 
   return (
     <div>
+      <Navbar />
+
       <Text title={"Todo Application"} />
       <div>
         <Input
