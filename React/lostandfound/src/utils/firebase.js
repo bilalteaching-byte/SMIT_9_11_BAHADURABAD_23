@@ -7,7 +7,7 @@ import {
 import {
     collection,
     getFirestore,
-} from "firebase/firestore"
+} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAjwET92pH3NEt_irgVWHxZ7xttr5QB7hY",
@@ -23,8 +23,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const auth = getAuth(app)
-export const db = getFirestore(app)
-export const itemsRef = collection(db, "items")
-export const usersRef = collection(db, "users")
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const itemsRef = collection(db, "items");
+export const usersRef = collection(db, "users");
+
+export const getCommentsRef = (itemId) =>
+  collection(db, "items", itemId, "comments");
 

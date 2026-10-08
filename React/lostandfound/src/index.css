@@ -1,9 +1,1 @@
 @import "tailwindcss";
-
-
-input{
-  border: 1px solid gray;
-  margin: 2px;
-  padding: 5px;
-  border-radius: 3px;
-}
