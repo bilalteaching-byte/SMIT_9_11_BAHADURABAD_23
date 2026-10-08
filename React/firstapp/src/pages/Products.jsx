@@ -4,7 +4,6 @@ import Navbar from "../components/navbar";
 function Products() {
   return (
     <div>
-      <Navbar />
       <h1>Products</h1>
 
       <Link to={'/product/1'}> Product 1 </Link>

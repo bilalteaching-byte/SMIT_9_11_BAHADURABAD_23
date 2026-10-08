@@ -8,16 +8,9 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import About from "./pages/About.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import AuthLayout from "./components/AuthLayout.jsx";
+import HomeLayout from "./components/HomeLayout.jsx";
 
-createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/todo" element={<Todos />} />
-      <Route path="/watch" element={<Stopwatch />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/product/:id" element={<ProductDetail />} />
-    </Routes>
-  </BrowserRouter>,
-);
+createRoot(document.getElementById("root")).render(<App />);

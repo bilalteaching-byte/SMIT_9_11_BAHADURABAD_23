@@ -41,8 +41,6 @@ function Todos() {
 
   return (
     <div>
-      <Navbar />
-
       <Text title={"Todo Application"} />
       <div>
         <Input

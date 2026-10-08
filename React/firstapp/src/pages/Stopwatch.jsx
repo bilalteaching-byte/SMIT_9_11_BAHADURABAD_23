@@ -35,8 +35,6 @@ function Stopwatch() {
 
   return (
     <div>
-      <Navbar />
-
       <Text title={"StopWatch"} size={fontSizes.huge} />
 
       <div
