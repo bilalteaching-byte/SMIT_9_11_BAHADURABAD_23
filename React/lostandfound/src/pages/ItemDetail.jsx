@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import { auth, itemsRef } from "../utils/firebase";
 
 function ItemDetail({ user }) {
-  const { id } = useParams();
+  const { id, } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);

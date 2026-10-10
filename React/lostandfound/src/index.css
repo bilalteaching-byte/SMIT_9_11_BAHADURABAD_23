@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+.app-shell {
+  min-height: 100vh;
+  background-color: var(--color-page);
+  color: var(--color-text);
+}
+
+.app-shell [class~="bg-white"] {
+  background-color: var(--color-surface);
+}
+
+.app-shell [class~="bg-gray-50"],
+.app-shell [class~="bg-gray-100"] {
+  background-color: var(--color-surface-muted);
+}
+
+.app-shell [class~="border-gray-100"],
+.app-shell [class~="border-gray-200"],
+.app-shell [class~="border-gray-300"] {
+  border-color: var(--color-border);
+}
+
+.app-shell [class~="text-gray-900"],
+.app-shell [class~="text-gray-800"] {
+  color: var(--color-text-strong);
+}
+
+.app-shell [class~="text-gray-700"] {
+  color: var(--color-text-strong);
+}
+
+.app-shell [class~="text-gray-500"],
+.app-shell [class~="text-gray-400"] {
+  color: var(--color-text-muted);
+}
+
+.app-shell input,
+.app-shell textarea,
+.app-shell select {
+  background-color: var(--color-input);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.app-shell input::placeholder,
+.app-shell textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.app-shell select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
