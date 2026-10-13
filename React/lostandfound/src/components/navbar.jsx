@@ -17,6 +17,15 @@ function Navbar({ user }) {
         <Link to="/" className="text-xl font-bold text-gray-900 hover:text-blue-600 transition">
           Lost & Found
         </Link>
+        <Link to="/posts" className="text-xl font-bold text-gray-900 hover:text-blue-600 transition">
+          Posts
+        </Link>
+        <Link to="/users" className="text-xl font-bold text-gray-900 hover:text-blue-600 transition">
+         Users
+        </Link>
+        <Link to="/photos" className="text-xl font-bold text-gray-900 hover:text-blue-600 transition">
+          Photos
+        </Link>
 
         <div className="flex items-center gap-3">
           <button

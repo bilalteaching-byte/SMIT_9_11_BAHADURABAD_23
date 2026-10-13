@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./utils/firebase";
 import { ThemeContext, themes } from './contex/ThemeContext';
+import Post from "./pages/posts";
+import Users from "./pages/users";
+import Photos from "./pages/photos";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -55,6 +58,9 @@ function App() {
             <Route path="/auth" element={<Auth user={user} />} />
             <Route path="/" element={<Items user={user} />} />
             <Route path="/items/:id" element={<ItemDetail user={user} />} />
+            <Route path="/posts" element={<Post user={user} />} />
+            <Route path="/users" element={<Users user={user} />} />
+            <Route path="/photos" element={<Photos user={user} />} />
           </Routes>
         </BrowserRouter>
       </div>
