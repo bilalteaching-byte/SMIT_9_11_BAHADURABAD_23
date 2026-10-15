@@ -8,7 +8,7 @@ function ItemCard({ item }) {
           <h3 className="text-xl font-bold text-gray-900">{item.itemName}</h3>
           <p className="text-sm text-gray-500 mt-1 line-clamp-2">{item.itemDesc}</p>
         </div>
-
+    
         {item.isFound ? (
           <span className="shrink-0 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
             Found
