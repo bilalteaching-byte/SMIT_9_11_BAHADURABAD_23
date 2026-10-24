@@ -1,30 +1,30 @@
-import express from "express"
+import express from 'express'
+import testRoutes from './routes/test.js'
+import userRoutes from './routes/users.js'
 
-const app = express();
-const PORT = 3000;
+const app = express()
+const PORT = 3000
 
 //middleware
-app.use(express.json());
+app.use(express.json())
 
+const auth = (req, res, next) => {
+  console.log(req.headers)
+  if (req.headers['test-auth'] && req.headers['test-auth'] == '123456') {
+    next()
+  } else {
+    res.send('User not authorized')
+  }
+}
 
-app.get("/test", (req, res) => {
-    res.send({ data: { name: "Bilal" }, error: false, status: 200 })
-})
-app.post("/test", (req, res) => {
-    res.send("Post Request")
-})
-app.put("/test", (req, res) => {
-    res.send("PUT Request")
-})
-app.delete("/test", (req, res) => {
-    res.send("Delete Request")
-})
+app.use('/test', testRoutes)
+app.use('/user', auth, userRoutes)
 
 // Home route
-app.get("/", (req, res) => {
-    res.send("Server is running");
-});
+app.get('/', (req, res) => {
+  res.send('Server is running')
+})
 
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+  console.log(`Server running at http://localhost:${PORT}`)
+})
