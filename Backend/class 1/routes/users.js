@@ -1,9 +1,11 @@
 import express from "express"
+import User from "../models/user.js"
 
 const userRoutes = express.Router()
 
-userRoutes.get("/", (req, res) => {
-    res.send({ data: { name: "User" }, error: false, status: 200 })
+userRoutes.get("/", async (req, res) => {
+    const users = await User.find()
+    res.send({ data: users, error: false, status: 200 })
 })
 userRoutes.post("/", (req, res) => {
     res.send("Post User Request")
