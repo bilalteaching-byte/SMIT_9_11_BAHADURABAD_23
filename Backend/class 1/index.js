@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 import testRoutes from './routes/test.js'
 import userRoutes from './routes/users.js'
+import todoRoutes from './routes/todos.js';
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -30,6 +31,7 @@ const auth = (req, res, next) => {
 
 app.use('/test', testRoutes)
 app.use('/user', userRoutes)
+app.use('/todo', todoRoutes)
 
 // Home route
 app.get('/', (req, res) => {
