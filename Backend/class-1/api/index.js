@@ -38,6 +38,11 @@ app.get('/', (req, res) => {
   res.send('Server is running')
 })
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`)
-})
+// Export for Vercel; listen only when running locally
+export default app
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`)
+  })
+}
