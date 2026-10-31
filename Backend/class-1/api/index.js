@@ -1,4 +1,5 @@
 import express from 'express'
+import { readFileSync } from 'fs'
 import 'dotenv/config';
 import mongoose from 'mongoose';
 
@@ -10,8 +11,19 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 
+const homePage = readFileSync(new URL('./public/index.html', import.meta.url))
+
 //middleware
 app.use(express.json())
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204)
+  }
+  next()
+})
 
 mongoose.connect(process.env.MONGODBURI).then(() => {
   console.log("DB Connected")
@@ -33,9 +45,8 @@ app.use('/test', testRoutes)
 app.use('/user', userRoutes)
 app.use('/todo', todoRoutes)
 
-// Home route
 app.get('/', (req, res) => {
-  res.send('Server is running')
+  res.type('html').send(homePage)
 })
 
 // Export for Vercel; listen only when running locally

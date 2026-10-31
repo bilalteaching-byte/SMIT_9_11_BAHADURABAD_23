@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,560;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1b241c;
+      --moss: #234033;
+      --moss-deep: #163028;
+      --chalk: #f4efe4;
+      --paper: #fbf7ef;
+      --line: #e4d8c4;
+      --pencil: #c83c2b;
+      --pencil-dark: #9d2b1e;
+      --muted: #5e6b60;
+      --ok: #1f6b45;
+      --shadow: 0 18px 40px rgba(27, 36, 28, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      background-color: #efe6d4;
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(200, 60, 43, 0.08), transparent 28%),
+        repeating-linear-gradient(
+          transparent,
+          transparent 27px,
+          rgba(35, 64, 51, 0.07) 28px
+        );
+    }
+
+    header {
+      background: var(--moss-deep);
+      color: var(--chalk);
+      padding: 28px 6vw 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -50px;
+      width: 220px;
+      height: 220px;
+      border: 18px solid rgba(244, 239, 228, 0.08);
+      border-radius: 50%;
+    }
+
+    .kicker {
+      margin: 0 0 6px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #e7c2b4;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Fraunces, serif;
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 560;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+
+    header p {
+      max-width: 560px;
+      margin: 12px 0 0;
+      color: #d9e2da;
+      font-size: 17px;
+    }
+
+    .base {
+      margin-top: 16px;
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px dashed rgba(244, 239, 228, 0.35);
+      border-radius: 999px;
+      font-size: 13px;
+      color: #f4efe4;
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: -18px auto 48px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font-family: Fraunces, serif;
+      font-size: 28px;
+      font-weight: 560;
+    }
+
+    .hint {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1.5px solid #d7cbb8;
+      background: #fffdf8;
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 12px 13px;
+      font: inherit;
+      font-size: 16px;
+    }
+
+    textarea { min-height: 96px; resize: vertical; }
+
+    input:focus, textarea:focus {
+      outline: 3px solid rgba(200, 60, 43, 0.2);
+      border-color: var(--pencil);
+    }
+
+    button, .ghost {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    .primary, .save {
+      margin-top: 16px;
+      background: var(--pencil);
+      color: white;
+      border-radius: 999px;
+      padding: 12px 18px;
+    }
+
+    .primary:hover, .save:hover { background: var(--pencil-dark); }
+
+    .primary:disabled, .save:disabled {
+      background: #c9b8a8;
+      cursor: not-allowed;
+    }
+
+    .ghost {
+      background: transparent;
+      color: var(--moss);
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .ticket {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--moss);
+      color: var(--chalk);
+    }
+
+    .ticket strong {
+      display: block;
+      font-family: Fraunces, serif;
+      font-size: 24px;
+      font-weight: 560;
+    }
+
+    .id {
+      margin-top: 8px;
+      word-break: break-all;
+      font-size: 13px;
+      color: #f0d2c8;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .feed { display: grid; gap: 14px; }
+
+    .post {
+      position: relative;
+      padding: 18px 18px 16px 22px;
+      border-left: 6px solid var(--moss);
+    }
+
+    .post.mine { border-left-color: var(--pencil); }
+
+    .pin {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--pencil);
+      box-shadow: 0 6px 0 rgba(200, 60, 43, 0.15);
+    }
+
+    .post h3 {
+      margin: 0 36px 10px 0;
+      font-family: Fraunces, serif;
+      font-size: 26px;
+      font-weight: 560;
+      line-height: 1.15;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .who { color: var(--ink); font-weight: 700; }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .edit-box { display: grid; gap: 8px; }
+
+    .banner {
+      display: none;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f8e4df;
+      color: var(--pencil-dark);
+    }
+
+    .banner.show { display: block; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: var(--chalk);
+      padding: 12px 16px;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .empty {
+      padding: 28px 8px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 800px) {
+      main { grid-template-columns: 1fr; margin-top: 16px; }
+      header { padding-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="kicker">Class board</p>
+    <h1>Write it. Sign it.</h1>
+    <p>Make your id, post a note, and edit only the notes you created. Every note shows who wrote it and when it was added.</p>
+    <div class="base" id="baseLabel"></div>
+  </header>
+
+  <main>
+    <section class="card" id="identity">
+      <h2>Your id</h2>
+      <p class="hint">This id is saved in the browser and used as the author of your posts.</p>
+      <div class="banner" id="userError"></div>
+      <form id="userForm">
+        <label for="name">Name</label>
+        <input id="name" name="name" required placeholder="Ali" />
+        <label for="age">Age</label>
+        <input id="age" name="age" type="number" min="1" required placeholder="20" />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="ali@example.com" />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required placeholder="At least one word" />
+        <button class="primary" type="submit">Create id</button>
+      </form>
+      <div id="ticket" hidden></div>
+    </section>
+
+    <section>
+      <div class="card" style="margin-bottom: 16px;">
+        <div class="row">
+          <h2>New post</h2>
+        </div>
+        <p class="hint" id="postHint">Create your id first. The post is saved with your name and the time it was added.</p>
+        <div class="banner" id="postError"></div>
+        <form id="postForm">
+          <label for="title">Post</label>
+          <textarea id="title" required placeholder="What do you want to share?"></textarea>
+          <button class="primary" id="postBtn" type="submit" disabled>Post</button>
+        </form>
+      </div>
+      <div class="feed" id="feed"></div>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const BASE_URL = new URLSearchParams(location.search).get("api")
+      || (location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? location.origin
+        : "https://api-phi-nine-12.vercel.app")
+
+    const USER_KEY = "class-board-user"
+    let me = JSON.parse(localStorage.getItem(USER_KEY) || "null")
+    let posts = []
+
+    const baseLabel = document.querySelector("#baseLabel")
+    const userForm = document.querySelector("#userForm")
+    const userError = document.querySelector("#userError")
+    const ticket = document.querySelector("#ticket")
+    const postForm = document.querySelector("#postForm")
+    const postError = document.querySelector("#postError")
+    const postBtn = document.querySelector("#postBtn")
+    const feed = document.querySelector("#feed")
+    const toast = document.querySelector("#toast")
+
+    baseLabel.textContent = BASE_URL
+
+    function showError(el, message) {
+      el.textContent = message || ""
+      el.classList.toggle("show", Boolean(message))
+    }
+
+    function ping(message) {
+      toast.textContent = message
+      toast.classList.add("show")
+      clearTimeout(ping.timer)
+      ping.timer = setTimeout(() => toast.classList.remove("show"), 2400)
+    }
+
+    function creatorId(post) {
+      const by = post.createdBy
+      if (by && typeof by === "object") return String(by._id || "")
+      return String(by || "")
+    }
+
+    function creatorName(post) {
+      const by = post.createdBy
+      if (by && typeof by === "object" && by.name) return by.name
+      return "Unknown"
+    }
+
+    function addedWhen(post) {
+      if (!post.createdAt) return "time not recorded"
+      return new Date(post.createdAt).toLocaleString(undefined, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      })
+    }
+
+    function renderMe() {
+      postBtn.disabled = !me
+      document.querySelector("#postHint").textContent = me
+        ? "This post is saved with your name and the time it was added."
+        : "Create your id first. The post is saved with your name and the time it was added."
+      if (!me) {
+        userForm.hidden = false
+        ticket.hidden = true
+        return
+      }
+      userForm.hidden = true
+      ticket.hidden = false
+      ticket.className = "ticket"
+      ticket.innerHTML = `
+        <strong>${escapeHtml(me.name)}</strong>
+        <div>${escapeHtml(me.email)}</div>
+        <div class="id">id ${escapeHtml(me._id)}</div>
+        <div class="actions"><button class="ghost" id="switchUser" type="button" style="color:#f4efe4">Use a different id</button></div>
+      `
+      document.querySelector("#switchUser").addEventListener("click", () => {
+        me = null
+        localStorage.removeItem(USER_KEY)
+        renderMe()
+        renderPosts()
+      })
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+    }
+
+    function renderPosts() {
+      if (!posts.length) {
+        feed.innerHTML = `<div class="card empty">No posts yet. Create your id, then add the first one.</div>`
+        return
+      }
+      feed.innerHTML = posts.map((post) => {
+        const mine = me && creatorId(post) === String(me._id)
+        return `
+          <article class="card post ${mine ? "mine" : ""}" data-id="${escapeHtml(post._id)}">
+            <span class="pin"></span>
+            <h3>${escapeHtml(post.title)}</h3>
+            <p class="meta">Added ${escapeHtml(addedWhen(post))} by <span class="who">${escapeHtml(creatorName(post))}</span></p>
+            ${mine ? `<div class="actions"><button class="ghost edit" type="button">Edit your post</button></div>` : ""}
+          </article>
+        `
+      }).join("")
+
+      feed.querySelectorAll(".edit").forEach((button) => {
+        button.addEventListener("click", () => startEdit(button.closest(".post")))
+      })
+    }
+
+    function startEdit(article) {
+      const id = article.dataset.id
+      const post = posts.find((item) => item._id === id)
+      article.innerHTML = `
+        <form class="edit-box">
+          <label for="edit-${id}">Update your post</label>
+          <textarea id="edit-${id}" required>${escapeHtml(post.title)}</textarea>
+          <div class="actions">
+            <button class="save" type="submit">Save</button>
+            <button class="ghost cancel" type="button">Cancel</button>
+          </div>
+        </form>
+      `
+      article.querySelector(".cancel").addEventListener("click", renderPosts)
+      article.querySelector("form").addEventListener("submit", (event) => saveEdit(event, id))
+    }
+
+    async function saveEdit(event, id) {
+      event.preventDefault()
+      const title = event.target.querySelector("textarea").value.trim()
+      const button = event.target.querySelector(".save")
+      button.disabled = true
+      try {
+        const res = await fetch(`${BASE_URL}/todo/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, userId: me._id })
+        })
+        const json = await res.json()
+        if (!res.ok || json.error) throw new Error(json.errorMsg || "Could not update post")
+        ping("Post updated")
+        await loadPosts()
+      } catch (err) {
+        button.disabled = false
+        ping(err.message)
+      }
+    }
+
+    async function loadPosts() {
+      const res = await fetch(`${BASE_URL}/todo`)
+      const json = await res.json()
+      posts = (json.data || []).slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      renderPosts()
+    }
+
+    userForm.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      showError(userError, "")
+      const button = userForm.querySelector("button")
+      button.disabled = true
+      const body = {
+        name: userForm.name.value.trim(),
+        age: Number(userForm.age.value),
+        email: userForm.email.value.trim(),
+        password: userForm.password.value
+      }
+      try {
+        const res = await fetch(`${BASE_URL}/user`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        })
+        const json = await res.json()
+        if (!res.ok || json.error) throw new Error(json.errorMsg || "Could not create id")
+        me = {
+          _id: json.data._id,
+          name: json.data.name,
+          email: json.data.email,
+          age: json.data.age
+        }
+        localStorage.setItem(USER_KEY, JSON.stringify(me))
+        userForm.reset()
+        renderMe()
+        renderPosts()
+        ping("Id created")
+      } catch (err) {
+        showError(userError, err.message)
+      } finally {
+        button.disabled = false
+      }
+    })
+
+    postForm.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      showError(postError, "")
+      if (!me) {
+        showError(postError, "Create your id before posting.")
+        return
+      }
+      postBtn.disabled = true
+      try {
+        const res = await fetch(`${BASE_URL}/todo`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: postForm.title.value.trim(),
+            createdBy: me._id
+          })
+        })
+        const json = await res.json()
+        if (!res.ok || json.error) throw new Error(json.errorMsg || "Could not add post")
+        postForm.reset()
+        ping(`Posted by ${me.name}`)
+        await loadPosts()
+      } catch (err) {
+        showError(postError, err.message)
+      } finally {
+        postBtn.disabled = !me
+      }
+    })
+
+    renderMe()
+    loadPosts().catch(() => {
+      feed.innerHTML = `<div class="card empty">Could not load posts from the API.</div>`
+    })
+  </script>
+</body>
+</html>
