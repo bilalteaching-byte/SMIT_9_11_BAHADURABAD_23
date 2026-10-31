@@ -1,0 +1,27 @@
+[
+ {
+  "shape": "Manifesto",
+  "theme": "hedgerow",
+  "axes": "dark/high-contrast-serif/chromatic-green",
+  "hero": "Corridor",
+  "nav": "floating pill",
+  "footer": "statement",
+  "imagery": "the product, live",
+  "photos": [],
+  "sections": [
+   "Hero",
+   "Steps",
+   "Index",
+   "Form",
+   "Form",
+   "Footer"
+  ],
+  "signature": "the newest note in Prata with the author and the time",
+  "waived": [],
+  "prompt": "luxury class board for students: create an account and post",
+  "job": "join",
+  "draw": "e02812",
+  "date": "2026-10-31",
+  "mode": "build"
+ }
+]

@@ -1,5 +1,5 @@
 import express from 'express'
-import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
 import 'dotenv/config';
 import mongoose from 'mongoose';
 
@@ -10,8 +10,6 @@ import todoRoutes from './routes/todos.js';
 const app = express()
 const PORT = process.env.PORT || 3000
 
-
-const homePage = readFileSync(new URL('./public/index.html', import.meta.url))
 
 //middleware
 app.use(express.json())
@@ -44,10 +42,7 @@ const auth = (req, res, next) => {
 app.use('/test', testRoutes)
 app.use('/user', userRoutes)
 app.use('/todo', todoRoutes)
-
-app.get('/', (req, res) => {
-  res.type('html').send(homePage)
-})
+app.use(express.static(fileURLToPath(new URL('./public', import.meta.url))))
 
 // Export for Vercel; listen only when running locally
 export default app

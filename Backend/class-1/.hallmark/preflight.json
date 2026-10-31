@@ -1,0 +1,22 @@
+{
+  "scanned": "2026-10-31",
+  "findings": {
+    "fonts": "Fraunces + Atkinson Hyperlegible (api/public/index.html L9, L32, L70)",
+    "palette": "Custom properties at :root: ink, moss, chalk, paper, pencil (api/public/index.html L11-23). Some colours are still written as literals in rules.",
+    "motion": "None",
+    "spacing": "Ad hoc padding and gaps. No spacing scale.",
+    "framework": "Express 5 serving one HTML file (api/package.json L16; api/index.js serves api/public/index.html)"
+  },
+  "preserve": [
+    "Class board behaviour: create a user id, post, show who wrote it and when, edit only your own post",
+    "Existing Express routes for /user and /todo"
+  ],
+  "introduce": [
+    "shape",
+    "theme",
+    "gates",
+    "hero discipline",
+    "slots"
+  ],
+  "conflict": "api/package.json L4 calls this the backend for MCT (Muhalla Cricket Tournament). The page in api/public/index.html is a class board for users and posts. Preserving the class board until you say otherwise."
+}
