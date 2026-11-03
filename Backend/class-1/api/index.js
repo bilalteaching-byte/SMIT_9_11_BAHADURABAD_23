@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000
 
 //middleware
 app.use(express.json())
+
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -42,7 +44,7 @@ const auth = (req, res, next) => {
 app.use('/test', testRoutes)
 app.use('/user', userRoutes)
 app.use('/todo', todoRoutes)
-app.use(express.static(fileURLToPath(new URL('./public', import.meta.url))))
+// app.use(express.static(fileURLToPath(new URL('./public', import.meta.url))))
 
 // Export for Vercel; listen only when running locally
 export default app
