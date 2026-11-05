@@ -3,10 +3,11 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
+import authMiddleware from "../middlewares/authmiddleware.js";
 
 const userRoutes = express.Router();
 
-userRoutes.get("/", async (req, res) => {
+userRoutes.get("/", authMiddleware, async (req, res) => {
   const users = await User.find().select("name _id email age");
   res.send({ data: users, error: false, status: 200 });
 });
@@ -59,9 +60,7 @@ userRoutes.post("/", async (req, res) => {
     let userInfo = { ...body };
 
     let hashPassword = await bcrypt.hash(userInfo.password, 10);
-    console.log(hashPassword);
     userInfo.password = hashPassword;
-    console.log("userInfo=>", userInfo);
     const user = await User.create(userInfo);
 
     res.status(201).send({ status: 201, data: user, error: false });
