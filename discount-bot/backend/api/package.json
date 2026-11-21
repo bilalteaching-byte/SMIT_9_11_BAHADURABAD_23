@@ -2,12 +2,15 @@
   "name": "discount-bot-api",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.9.0",
+    "nodemon": "^3.1.14",
     "resend": "^4.1.2"
   }
 }

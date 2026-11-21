@@ -10,6 +10,15 @@ const listingSchema = new mongoose.Schema(
     },
     title: { type: String, required: true, trim: true, maxlength: 160 },
     description: { type: String, trim: true, maxlength: 5000, default: "" },
+    imageUrls: {
+      type: [{ type: String, trim: true, maxlength: 2048 }],
+      default: [],
+      validate: {
+        validator: (urls) =>
+          urls.length <= 10 && urls.every((url) => /^https:\/\//i.test(url)),
+        message: "Provide up to 10 valid HTTPS image URLs.",
+      },
+    },
     currency: {
       type: String,
       required: true,
